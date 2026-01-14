@@ -9,8 +9,9 @@ AI agent skills for [Nette Framework](https://nette.org) development. These skil
 The skills in this repository use a universal format compatible with various AI coding assistants:
 
 - **[Antigravity](https://agentskills.io/)** - Google's AI coding assistant
-- **[Claude Code](https://claude.com/product/claude-code)** - Anthropic's AI coding assistant
-- **Other agents** - Any AI assistant that supports the Agent Skills standard (SKILL.md with YAML frontmatter)
+- **[Cursor](https://cursor.com/)** - AI-powered code editor
+- **[Claude Code](https://github.com/nette/claude-code)** - Use the official Nette plugin repository
+- **Other agents** - Any AI assistant that supports skills/rules format
 
 ## 📦 Available Skills
 
@@ -45,18 +46,33 @@ git clone https://github.com/zraly/nette-ai-skills .agent/skills/nette
 
 See [ANTIGRAVITY.md](ANTIGRAVITY.md) for detailed instructions.
 
+### For Cursor
+
+Create a `.cursorrules` file in your project root that references the skills:
+
+```bash
+# Clone to your project
+git clone https://github.com/zraly/nette-ai-skills .nette-skills
+
+# Then reference in .cursorrules (see CURSOR.md for details)
+```
+
+See [CURSOR.md](CURSOR.md) for detailed instructions.
+
 ### For Claude Code
+
+Use the official Nette plugin repository:
 
 ```
 /plugin marketplace add nette/claude-code
 /plugin install nette@nette
 ```
 
-See [CLAUDE-CODE.md](CLAUDE-CODE.md) for detailed instructions.
+See https://github.com/nette/claude-code for details.
 
 ### For Other AI Assistants
 
-The skills follow the universal Agent Skills format:
+The skills follow a universal format:
 
 1. **Clone the repository:**
    ```bash
@@ -97,12 +113,8 @@ nette-ai-skills/
 │   │   ├── validation.md
 │   │   └── rendering.md
 │   └── ...
-├── claude-code/              # Claude Code specific plugins
-│   └── plugins/
-│       ├── nette/
-│       └── nette-dev/
 ├── ANTIGRAVITY.md           # Antigravity installation guide
-├── CLAUDE-CODE.md           # Claude Code installation guide
+├── CURSOR.md                # Cursor installation guide
 └── README.md                # This file
 ```
 
@@ -145,4 +157,5 @@ MIT License - see the [nette/claude-code](https://github.com/nette/claude-code) 
 - [Nette Framework](https://nette.org)
 - [Source Repository: nette/claude-code](https://github.com/nette/claude-code)
 - [Antigravity Documentation](https://agentskills.io/)
-- [Claude Code Documentation](https://claude.com/product/claude-code)
+- [Cursor Documentation](https://cursor.com/docs)
+- [Claude Code Plugin](https://github.com/nette/claude-code)

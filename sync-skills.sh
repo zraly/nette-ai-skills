@@ -54,17 +54,9 @@ for skill in "${NETTE_SKILLS[@]}"; do
 	cp -r "$TMP_DIR/plugins/nette/skills/$skill/"* "$SKILLS_DIR/$skill/" 2>/dev/null || true
 done
 
-# Sync Claude Code plugins (keep original structure)
-echo "📦 Syncing Claude Code plugins..."
-CLAUDE_DIR="$SCRIPT_DIR/claude-code/plugins"
-mkdir -p "$CLAUDE_DIR"
-cp -r "$TMP_DIR/plugins/"* "$CLAUDE_DIR/"
-
 # Cleanup
 rm -rf "$TMP_DIR"
 
 echo "✅ Sync completed!"
 echo ""
-echo "Synced:"
-echo "  - Skills: $(ls -1 "$SKILLS_DIR" | wc -l | tr -d ' ') skills"
-echo "  - Claude Code plugins: $(ls -1 "$CLAUDE_DIR" | wc -l | tr -d ' ') plugins"
+echo "Synced skills: $(ls -1 "$SKILLS_DIR" | wc -l | tr -d ' ')"
