@@ -13,38 +13,59 @@ Skills are reusable packages of knowledge that extend what the AI agent can do. 
 
 ### Global Installation (Recommended)
 
-Skills installed globally work across all your projects:
+Skills must be placed directly in `~/.gemini/antigravity/skills/` for Antigravity to detect them automatically.
+
+**Option A: Using symlinks (recommended - easy to update)**
 
 ```bash
+# Clone the repository
+git clone https://github.com/zraly/nette-ai-skills ~/nette-ai-skills
+
+# Create symlinks for each skill
 cd ~/.gemini/antigravity/skills
-git clone https://github.com/zraly/nette-ai-skills nette
+ln -s ~/nette-ai-skills/skills/* .
+```
+
+**Option B: Direct copy**
+
+```bash
+# Clone and copy skills directly
+git clone https://github.com/zraly/nette-ai-skills /tmp/nette-ai-skills
+cp -r /tmp/nette-ai-skills/skills/* ~/.gemini/antigravity/skills/
+rm -rf /tmp/nette-ai-skills
 ```
 
 ### Project-Specific Installation
 
-For project-specific skills:
+For project-specific skills, symlink into `.agent/skills/`:
 
 ```bash
+# Clone the repository (if not already cloned)
+git clone https://github.com/zraly/nette-ai-skills ~/nette-ai-skills
+
+# Create project skills directory and symlink
 cd your-project
 mkdir -p .agent/skills
 cd .agent/skills
-git clone https://github.com/zraly/nette-ai-skills nette
+ln -s ~/nette-ai-skills/skills/* .
 ```
 
 ## Verification
 
-After installation, you can verify the skills are available:
+After installation, verify the skills are in the correct location:
 
 ```bash
-ls -la ~/.gemini/antigravity/skills/nette/skills/
+ls -la ~/.gemini/antigravity/skills/
 ```
 
-You should see folders like:
-- `commit-messages`
-- `php-coding-standards`
-- `nette-forms`
-- `latte-templates`
+You should see skill folders **directly** in this directory:
+- `commit-messages/`
+- `php-coding-standards/`
+- `nette-forms/`
+- `latte-templates/`
 - etc.
+
+**Important:** Skills must be directly in `~/.gemini/antigravity/skills/`, not nested in subdirectories like `nette/skills/`.
 
 ## Usage
 
@@ -86,27 +107,46 @@ You: Use the nette-database skill to create a query for all active users
 
 To get the latest skills and best practices:
 
+**If using symlinks (Option A):**
+
 ```bash
-cd ~/.gemini/antigravity/skills/nette
+cd ~/nette-ai-skills
 git pull
+# Symlinks automatically point to updated files
+```
+
+**If using direct copy (Option B):**
+
+```bash
+# Re-download and copy
+git clone https://github.com/zraly/nette-ai-skills /tmp/nette-ai-skills
+cp -r /tmp/nette-ai-skills/skills/* ~/.gemini/antigravity/skills/
+rm -rf /tmp/nette-ai-skills
 ```
 
 ## Folder Structure
 
+After installation, your directory should look like this:
+
 ```
-~/.gemini/antigravity/skills/nette/
-├── README.md
-├── ANTIGRAVITY.md (this file)
-└── skills/
-    ├── commit-messages/
-    │   └── SKILL.md
-    ├── nette-forms/
-    │   ├── SKILL.md
-    │   ├── controls.md
-    │   ├── validation.md
-    │   └── rendering.md
-    └── ... (other skills)
+~/.gemini/antigravity/skills/
+├── commit-messages/
+│   └── SKILL.md
+├── nette-forms/
+│   ├── SKILL.md
+│   ├── controls.md
+│   ├── validation.md
+│   └── rendering.md
+├── php-coding-standards/
+│   └── SKILL.md
+├── latte-templates/
+│   ├── SKILL.md
+│   ├── filters.md
+│   └── tags.md
+└── ... (other skills)
 ```
+
+**Key point:** Each skill must be a **direct subdirectory** of `~/.gemini/antigravity/skills/`.
 
 ## Skill Structure
 
@@ -122,26 +162,42 @@ Each skill folder contains:
 
 ## Troubleshooting
 
-### Skills not working?
+### Skills not being detected?
 
-1. Check the installation path:
+1. **Check the directory structure:**
    ```bash
-   ls ~/.gemini/antigravity/skills/nette/antigravity/skills/
+   ls ~/.gemini/antigravity/skills/
    ```
+   You should see skill folders **directly** here (commit-messages, nette-forms, etc.), not nested in subdirectories.
 
-2. Ensure SKILL.md files have proper frontmatter:
+2. **Verify SKILL.md files exist:**
    ```bash
-   head -5 ~/.gemini/antigravity/skills/nette/skills/nette-forms/SKILL.md
+   head -5 ~/.gemini/antigravity/skills/nette-forms/SKILL.md
    ```
+   Should show YAML frontmatter with `name` and `description`.
 
-3. Restart your Antigravity session
+3. **Restart your Antigravity session**
 
 ### Need to reinstall?
 
+**If using symlinks:**
 ```bash
-rm -rf ~/.gemini/antigravity/skills/nette
+# Remove symlinks
 cd ~/.gemini/antigravity/skills
-git clone https://github.com/zraly/nette-ai-skills nette
+rm commit-messages nette-* php-* latte-templates frontend-development 2>/dev/null || true
+
+# Recreate
+ln -s ~/nette-ai-skills/skills/* .
+```
+
+**If using direct copy:**
+```bash
+# Remove old skills
+cd ~/.gemini/antigravity/skills
+rm -rf commit-messages nette-* php-* latte-templates frontend-development
+
+# Recopy
+cp -r ~/nette-ai-skills/skills/* .
 ```
 
 ## More Information

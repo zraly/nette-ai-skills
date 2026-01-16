@@ -36,15 +36,18 @@ The skills in this repository use a universal format compatible with various AI 
 
 ### For Antigravity
 
-```bash
-# Global installation (recommended)
-git clone https://github.com/zraly/nette-ai-skills ~/.gemini/antigravity/skills/nette
+**Important:** Skills must be placed directly in `~/.gemini/antigravity/skills/`, not in subdirectories.
 
-# Or project-specific
-git clone https://github.com/zraly/nette-ai-skills .agent/skills/nette
+```bash
+# Clone the repository
+git clone https://github.com/zraly/nette-ai-skills ~/nette-ai-skills
+
+# Create symlinks (recommended - easy to update)
+cd ~/.gemini/antigravity/skills
+ln -s ~/nette-ai-skills/skills/* .
 ```
 
-See [ANTIGRAVITY.md](ANTIGRAVITY.md) for detailed instructions.
+See [ANTIGRAVITY.md](ANTIGRAVITY.md) for detailed instructions and alternative installation methods.
 
 ### For Cursor
 
