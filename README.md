@@ -13,6 +13,8 @@ openskills install --universal zraly/nette-agent-skills
 
 This installs skills to `.agent/skills/` - works with Antigravity, Cursor, Claude Code, and other AI assistants.
 
+**Tip:** Add `.agent/` to your project's `.gitignore` - skills don't need to be versioned.
+
 **Update:** `openskills update zraly/nette-agent-skills`
 
 ## 📦 Available Skills
